@@ -6,22 +6,50 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sanity:dev": "sanity dev",
+    "sanity:build": "sanity build",
+    "sanity:deploy": "sanity deploy",
+    "sanity:manage": "sanity manage",
+    "setup-sanity": "node scripts/setup-sanity.js",
+    "populate-sanity": "tsx scripts/populate-sanity.ts"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.8",
+    "@heroicons/react": "^2.2.0",
+    "@hookform/resolvers": "^5.2.2",
+    "@portabletext/react": "^4.0.3",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@sanity/client": "^7.11.2",
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^4.9.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.16",
+    "lucide-react": "^0.544.0",
+    "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.3"
+    "react-hook-form": "^7.63.0",
+    "sanity": "^4.9.0",
+    "styled-components": "^6.1.19",
+    "tailwind-merge": "^3.3.1",
+    "yet-another-react-lightbox": "^3.25.0",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "autoprefixer": "^10.4.21",
+    "dotenv": "^16.4.5",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "tsx": "^4.7.1",
+    "typescript": "^5"
   }
 }

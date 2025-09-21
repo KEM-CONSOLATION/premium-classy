@@ -34,7 +34,7 @@ export function HeroSection({ siteSettings }: HeroSectionProps) {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight">
             {heroData?.headline ||
               siteSettings?.tagline ||
-              "Creating Unforgettable Moments"}
+              "Premium & Classy Events"}
           </h1>
 
           {heroData?.subheadline && (

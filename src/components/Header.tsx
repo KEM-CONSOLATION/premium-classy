@@ -44,12 +44,12 @@ export function Header({ siteSettings }: HeaderProps) {
               ) : (
                 <div className="h-8 w-8 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-sm">
-                    {siteSettings?.brandName?.charAt(0) || "E"}
+                    {siteSettings?.brandName?.charAt(0) || "P"}
                   </span>
                 </div>
               )}
               <span className="text-xl font-bold text-gray-900">
-                {siteSettings?.brandName || "EventPlanner"}
+                {siteSettings?.brandName || "Premium&Classy"}
               </span>
             </Link>
           </div>
@@ -148,12 +148,12 @@ export function Header({ siteSettings }: HeaderProps) {
                   ) : (
                     <div className="h-8 w-8 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full flex items-center justify-center">
                       <span className="text-white font-bold text-sm">
-                        {siteSettings?.brandName?.charAt(0) || "E"}
+                        {siteSettings?.brandName?.charAt(0) || "P"}
                       </span>
                     </div>
                   )}
                   <span className="text-lg font-bold text-gray-900">
-                    {siteSettings?.brandName || "EventPlanner"}
+                    {siteSettings?.brandName || "Premium&Classy"}
                   </span>
                 </Link>
                 <button

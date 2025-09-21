@@ -58,12 +58,12 @@ export function Footer({ siteSettings }: FooterProps) {
               ) : (
                 <div className="h-8 w-8 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-sm">
-                    {siteSettings?.brandName?.charAt(0) || "E"}
+                    {siteSettings?.brandName?.charAt(0) || "P"}
                   </span>
                 </div>
               )}
               <span className="text-xl font-bold text-white">
-                {siteSettings?.brandName || "EventPlanner"}
+                {siteSettings?.brandName || "Premium&Classy"}
               </span>
             </Link>
             <p className="text-sm leading-6 text-gray-300">
@@ -203,7 +203,7 @@ export function Footer({ siteSettings }: FooterProps) {
         <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
           <div className="flex flex-col items-center justify-between sm:flex-row">
             <p className="text-xs leading-5 text-gray-400">
-              &copy; {currentYear} {siteSettings?.brandName || "EventPlanner"}.
+              &copy; {currentYear} {siteSettings?.brandName || "Premium&Classy"}.
               All rights reserved.
             </p>
             <div className="mt-4 sm:mt-0">

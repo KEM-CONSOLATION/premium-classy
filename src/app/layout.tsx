@@ -14,7 +14,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Professional Event Planning Services | EventPlanner",
+  title: "Professional Event Planning Services | Premium&Classy",
   description:
     "Transform your special moments into unforgettable experiences. Professional event planning for weddings, birthdays, corporate events, and more.",
   keywords: [

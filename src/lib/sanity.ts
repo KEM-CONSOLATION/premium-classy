@@ -2,16 +2,23 @@ import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { config } from "@/config";
+import { sanityClient } from "@/lib/sanity-client";
 
-export const client = createClient({
+// Create direct Sanity client
+const directClient = createClient({
   projectId: config.sanity.projectId,
   dataset: config.sanity.dataset,
   apiVersion: config.sanity.apiVersion,
   useCdn: config.sanity.useCdn,
   token: config.sanity.token,
+  ignoreBrowserTokenWarning: true,
+  perspective: "published",
 });
 
-const builder = imageUrlBuilder(client);
+// Use proxy client in production to avoid CORS, direct client in development
+export const client = sanityClient || directClient;
+
+const builder = imageUrlBuilder(directClient);
 
 export function urlFor(source: SanityImageSource) {
   return builder.image(source);

@@ -179,9 +179,9 @@ const sampleSiteSettings = {
   secondaryColor: '#F5F5DC',
   contactInfo: {
     email: 'hello@elegantevents.co',
-    phone: '+234 (70) 3189-6845',
+    phone: '+234 (81) 3677-9904',
     address: '123 Event Plaza, Suite 456\nSan Francisco, CA 94102',
-    whatsappNumber: '+2347031896845',
+    whatsappNumber: '+2348136779904',
   },
   socialLinks: {
     instagram: 'https://instagram.com/eleganteventsco',

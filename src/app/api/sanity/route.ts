@@ -2,13 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@sanity/client";
 import { config } from "@/config";
 
-// Create a server-side Sanity client
+// Create a server-side Sanity client (no token for public read access)
 const serverClient = createClient({
   projectId: config.sanity.projectId,
   dataset: config.sanity.dataset,
   apiVersion: config.sanity.apiVersion,
-  useCdn: false, // Don't use CDN for server-side requests
-  token: config.sanity.token,
+  useCdn: true, // Use CDN for better performance
   perspective: "published",
 });
 

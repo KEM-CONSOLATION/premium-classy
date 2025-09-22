@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { client, queries } from "@/lib/sanity";
+import { fetchPortfolio } from "@/lib/sanity";
 import { urlFor } from "@/lib/sanity";
 import { Portfolio } from "@/types";
 import { sectionImages, imageAlts } from "@/lib/section-images";
@@ -28,7 +28,7 @@ export default function PortfolioPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const portfolioData = await client.fetch(queries.portfolio);
+        const portfolioData = await fetchPortfolio();
         setPortfolio(portfolioData || []);
         setFilteredPortfolio(portfolioData || []);
       } catch (error) {

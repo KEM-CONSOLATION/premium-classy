@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { client, queries } from "@/lib/sanity";
+import { fetchServices } from "@/lib/sanity";
 import { urlFor } from "@/lib/sanity";
 import { Service } from "@/types";
 import { sectionImages, imageAlts, serviceImages } from "@/lib/section-images";
@@ -25,7 +25,7 @@ export default function ServicesPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const servicesData = await client.fetch(queries.services);
+        const servicesData = await fetchServices();
         setServices(servicesData || []);
       } catch (error) {
         console.error("Error fetching services:", error);

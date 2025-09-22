@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { client, queries } from "@/lib/sanity";
+import { fetchTestimonials } from "@/lib/sanity";
 import { urlFor } from "@/lib/sanity";
 import { Testimonial } from "@/types";
 import { Star, Quote, Filter, Calendar, Heart } from "lucide-react";
@@ -23,7 +23,7 @@ export default function TestimonialsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const testimonialsData = await client.fetch(queries.testimonials);
+        const testimonialsData = await fetchTestimonials();
         setTestimonials(testimonialsData || []);
         setFilteredTestimonials(testimonialsData || []);
       } catch (error) {

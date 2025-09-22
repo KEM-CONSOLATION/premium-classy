@@ -6,7 +6,7 @@ import { ServicesPreview } from "@/components/ServicesPreview";
 import { PortfolioPreview } from "@/components/PortfolioPreview";
 import { TestimonialsPreview } from "@/components/TestimonialsPreview";
 import { StructuredData } from "@/components/StructuredData";
-import { client, queries } from "@/lib/sanity";
+import { fetchSiteSettings, fetchServices, fetchFeaturedPortfolio, fetchTestimonials } from "@/lib/sanity";
 import { SiteSettings, Service, Portfolio, Testimonial } from "@/types";
 import { generateStructuredData } from "@/lib/seo";
 
@@ -22,10 +22,10 @@ export default function Home() {
       try {
         const [settingsData, servicesData, portfolioData, testimonialsData] =
           await Promise.all([
-            client.fetch(queries.siteSettings),
-            client.fetch(queries.services),
-            client.fetch(queries.featuredPortfolio),
-            client.fetch(queries.testimonials),
+            fetchSiteSettings(),
+            fetchServices(),
+            fetchFeaturedPortfolio(),
+            fetchTestimonials(),
           ]);
 
         setSiteSettings(settingsData);

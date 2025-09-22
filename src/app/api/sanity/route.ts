@@ -1,5 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { client } from "@/lib/sanity";
+import { createClient } from "@sanity/client";
+import { config } from "@/config";
+
+// Create a server-side Sanity client
+const serverClient = createClient({
+  projectId: config.sanity.projectId,
+  dataset: config.sanity.dataset,
+  apiVersion: config.sanity.apiVersion,
+  useCdn: false, // Don't use CDN for server-side requests
+  token: config.sanity.token,
+  perspective: "published",
+});
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -10,7 +21,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const data = await client.fetch(query);
+    const data = await serverClient.fetch(query);
     
     return NextResponse.json(
       { result: data },
@@ -35,7 +46,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const result = await client.create(body);
+    const result = await serverClient.create(body);
     
     return NextResponse.json(
       { result },

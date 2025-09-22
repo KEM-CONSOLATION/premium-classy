@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Testimonial } from "@/types";
 import { urlFor } from "@/lib/sanity";
 import { sectionImages, imageAlts } from "@/lib/section-images";
+import { staggerContainer, staggerItem, fadeInUp } from "@/lib/animations";
 import { Star, Quote, ArrowRight } from "lucide-react";
 
 interface TestimonialsPreviewProps {
@@ -40,7 +42,13 @@ export function TestimonialsPreview({
         <div className="absolute inset-0 bg-white/90" />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
             What Our Clients Say
           </h2>
@@ -48,17 +56,24 @@ export function TestimonialsPreview({
             Don&apos;t just take our word for it. Here&apos;s what our satisfied clients
             have to say about their experience with us.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
           {previewTestimonials.map((testimonial) => (
-            <Card
-              key={testimonial._id}
-              className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white"
+            <motion.div 
+              key={testimonial._id} 
+              variants={staggerItem}
             >
-              <CardContent className="p-8">
-                {/* Quote Icon */}
-                <div className="mb-6">
+              <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white">
+                <CardContent className="p-8">
+                  {/* Quote Icon */}
+                  <div className="mb-6">
                   <Quote className="h-10 w-10 text-amber-400" />
                 </div>
 
@@ -127,8 +142,9 @@ export function TestimonialsPreview({
                 )}
               </CardContent>
             </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="text-center">
           <Button

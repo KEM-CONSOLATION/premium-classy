@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Portfolio } from "@/types";
 import { urlFor } from "@/lib/sanity";
 import { sectionImages } from "@/lib/section-images";
 import { getDefaultPortfolioImage } from "@/lib/portfolio-images";
 import { GalleryModal } from "@/components/GalleryModal";
+import { staggerContainer, staggerItem, fadeInUp } from "@/lib/animations";
 import { ArrowRight, Calendar, MapPin, Eye } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
@@ -43,7 +45,13 @@ export function PortfolioPreview({ portfolio }: PortfolioPreviewProps) {
         <div className="absolute inset-0 bg-white/90" />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
             Our Portfolio
           </h2>
@@ -51,11 +59,17 @@ export function PortfolioPreview({ portfolio }: PortfolioPreviewProps) {
             Take a look at some of the beautiful events we&apos;ve had the pleasure
             of planning and executing.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
           {previewPortfolio.map((item) => (
-            <div key={item._id} className="group cursor-pointer">
+            <motion.div key={item._id} className="group cursor-pointer" variants={staggerItem}>
               <Link href={`/portfolio/${item.slug.current}`}>
                 <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
                   {/* Main Image */}
@@ -149,9 +163,9 @@ export function PortfolioPreview({ portfolio }: PortfolioPreviewProps) {
                   </div>
                 </div>
               </Link>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="text-center">
           <Button

@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Portfolio } from "@/types";
 import { urlFor } from "@/lib/sanity";
 import { getPortfolioImages } from "@/lib/portfolio-images";
+import { modalAnimation } from "@/lib/animations";
 
 interface GalleryModalProps {
   isOpen: boolean;
@@ -40,18 +42,33 @@ export function GalleryModal({ isOpen, onClose, portfolio }: GalleryModalProps) 
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      
-      {/* Modal Content */}
-      <div className="relative z-10 w-full max-w-6xl mx-4">
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div 
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Backdrop */}
+          <motion.div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+          
+          {/* Modal Content */}
+          <motion.div 
+            className="relative z-10 w-full max-w-6xl mx-4"
+            variants={modalAnimation}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="text-white">
@@ -140,7 +157,9 @@ export function GalleryModal({ isOpen, onClose, portfolio }: GalleryModalProps) 
             <p className="text-gray-300">{images[currentIndex].caption}</p>
           </div>
         )}
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

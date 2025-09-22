@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Service } from "@/types";
 import { urlFor } from "@/lib/sanity";
 import { serviceImages, sectionImages } from "@/lib/section-images";
+import { staggerContainer, staggerItem, fadeInUp } from "@/lib/animations";
 import { ArrowRight } from "lucide-react";
 
 interface ServicesPreviewProps {
@@ -27,7 +29,13 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
         <div className="absolute inset-0 bg-white/85" />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
             Our Services
           </h2>
@@ -35,14 +43,18 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
             From intimate gatherings to grand celebrations, we bring your vision
             to life with meticulous planning and flawless execution.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
           {previewServices.map((service) => (
-            <Card
-              key={service._id}
-              className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 shadow-lg"
-            >
+            <motion.div key={service._id} variants={staggerItem}>
+              <Card className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 shadow-lg">
               <div className="relative h-64 overflow-hidden">
                 {service.featuredImage ? (
                   <Image
@@ -105,8 +117,9 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
                 </Button>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="text-center">
           <Button

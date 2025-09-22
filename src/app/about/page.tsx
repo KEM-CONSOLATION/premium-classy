@@ -189,10 +189,18 @@ export default function AboutPage() {
                     className="rounded-lg shadow-xl object-cover mx-auto"
                   />
                 ) : (
-                  <div className="w-full h-96 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg shadow-xl flex items-center justify-center mx-auto max-w-md">
-                    <span className="text-white text-6xl font-bold">
-                      {aboutSection.founderName.charAt(0)}
-                    </span>
+                  <div className="relative w-full h-96 rounded-lg shadow-xl overflow-hidden mx-auto max-w-md">
+                    <Image
+                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2088&q=80"
+                      alt={`${aboutSection.founderName} - Founder of Premium&Classy Event Planning`}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <p className="text-lg font-semibold">{aboutSection.founderName}</p>
+                      <p className="text-sm opacity-90">Founder & Lead Event Planner</p>
+                    </div>
                   </div>
                 )}
               </div>

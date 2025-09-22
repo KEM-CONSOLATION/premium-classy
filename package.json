@@ -11,7 +11,7 @@
     "sanity:build": "sanity build",
     "sanity:deploy": "sanity deploy",
     "sanity:manage": "sanity manage",
-    "setup-sanity": "node scripts/setup-sanity.js",
+    "setup-sanity": "node scripts/setup-sanity.mjs",
     "populate-sanity": "tsx scripts/populate-sanity.ts"
   },
   "dependencies": {

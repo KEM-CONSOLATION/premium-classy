@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { client, queries } from "@/lib/sanity";
 import { urlFor } from "@/lib/sanity";
 import { SiteSettings } from "@/types";
+import { sectionImages, imageAlts } from "@/lib/section-images";
 import { Heart, Award, Users, Clock, Star, CheckCircle } from "lucide-react";
 
 export default function AboutPage() {
@@ -42,13 +43,23 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-amber-50 to-orange-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={sectionImages.about.background}
+            alt={imageAlts.about.background}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-6">
-              {aboutSection?.title || "About Us"}
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">
+              {aboutSection?.title || "About Premium&Classy"}
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
               {aboutSection?.description ||
                 "We are passionate event planners dedicated to turning your dreams into unforgettable experiences."}
             </p>
@@ -135,7 +146,14 @@ export default function AboutPage() {
                   className="rounded-lg shadow-xl object-cover"
                 />
               ) : (
-                <div className="w-full h-96 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg shadow-xl flex items-center justify-center">
+                <div className="relative w-full h-96 rounded-lg shadow-xl overflow-hidden">
+                  <Image
+                    src={sectionImages.about.founder}
+                    alt={imageAlts.about.founder}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                   <div className="text-center text-white">
                     <Users className="h-24 w-24 mx-auto mb-4" />
                     <p className="text-xl font-semibold">Our Team</p>

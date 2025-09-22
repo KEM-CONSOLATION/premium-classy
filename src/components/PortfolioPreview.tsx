@@ -1,9 +1,13 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Portfolio } from "@/types";
 import { urlFor } from "@/lib/sanity";
-import { ArrowRight, Calendar, MapPin } from "lucide-react";
+import { sectionImages } from "@/lib/section-images";
+import { getDefaultPortfolioImage } from "@/lib/portfolio-images";
+import { GalleryModal } from "@/components/GalleryModal";
+import { ArrowRight, Calendar, MapPin, Eye } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
 interface PortfolioPreviewProps {
@@ -11,12 +15,34 @@ interface PortfolioPreviewProps {
 }
 
 export function PortfolioPreview({ portfolio }: PortfolioPreviewProps) {
+  const [selectedPortfolio, setSelectedPortfolio] = useState<Portfolio | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   // Show only first 6 portfolio items in preview
   const previewPortfolio = portfolio.slice(0, 6);
+  
+  const openGallery = (item: Portfolio) => {
+    setSelectedPortfolio(item);
+    setIsModalOpen(true);
+  };
+  
+  const closeGallery = () => {
+    setIsModalOpen(false);
+    setSelectedPortfolio(null);
+  };
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-20 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={sectionImages.portfolio.gallery}
+          alt="Event gallery background"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-white/90" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
             Our Portfolio
@@ -34,22 +60,30 @@ export function PortfolioPreview({ portfolio }: PortfolioPreviewProps) {
                 <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
                   {/* Main Image */}
                   <div className="relative h-80 overflow-hidden">
-                    {item.images && item.images.length > 0 ? (
+                    {((item.images && item.images.length > 0) || (item.gallery && item.gallery.length > 0)) ? (
                       <Image
-                        src={urlFor(item.images[0])
-                          .width(500)
-                          .height(400)
-                          .url()}
-                        alt={item.images[0].alt || item.title}
+                        src={
+                          item.images && item.images.length > 0
+                            ? urlFor(item.images[0]).width(500).height(400).url()
+                            : item.gallery && item.gallery.length > 0
+                            ? urlFor(item.gallery[0]).width(500).height(400).url()
+                            : getDefaultPortfolioImage(item.eventType).url
+                        }
+                        alt={
+                          item.images?.[0]?.alt || 
+                          item.gallery?.[0]?.alt || 
+                          item.title
+                        }
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-                        <span className="text-white text-4xl font-bold">
-                          {item.title.charAt(0)}
-                        </span>
-                      </div>
+                      <Image
+                        src={getDefaultPortfolioImage(item.eventType).url}
+                        alt={getDefaultPortfolioImage(item.eventType).alt}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
                     )}
 
                     {/* Overlay */}
@@ -66,10 +100,14 @@ export function PortfolioPreview({ portfolio }: PortfolioPreviewProps) {
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <Button
                         variant="outline"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          openGallery(item);
+                        }}
                         className="bg-white/90 hover:bg-white text-gray-900 border-white"
                       >
+                        <Eye className="mr-2 h-4 w-4" />
                         View Gallery
-                        <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </div>
                   </div>
@@ -128,6 +166,15 @@ export function PortfolioPreview({ portfolio }: PortfolioPreviewProps) {
           </Button>
         </div>
       </div>
+      
+      {/* Gallery Modal */}
+      {selectedPortfolio && (
+        <GalleryModal
+          isOpen={isModalOpen}
+          onClose={closeGallery}
+          portfolio={selectedPortfolio}
+        />
+      )}
     </section>
   );
 }

@@ -6,11 +6,20 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatDate(date: string | Date) {
+  if (!date) return "Date not available";
+  
+  const dateObj = new Date(date);
+  
+  // Check if date is valid
+  if (isNaN(dateObj.getTime())) {
+    return "Invalid date";
+  }
+  
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
-  }).format(new Date(date));
+  }).format(dateObj);
 }
 
 export function formatPhoneNumber(phone: string) {

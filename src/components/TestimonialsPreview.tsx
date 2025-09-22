@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Testimonial } from "@/types";
 import { urlFor } from "@/lib/sanity";
+import { sectionImages, imageAlts } from "@/lib/section-images";
 import { Star, Quote, ArrowRight } from "lucide-react";
 
 interface TestimonialsPreviewProps {
@@ -28,8 +29,17 @@ export function TestimonialsPreview({
   };
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-20 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={sectionImages.testimonials.background}
+          alt={imageAlts.testimonials.background}
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-white/90" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
             What Our Clients Say

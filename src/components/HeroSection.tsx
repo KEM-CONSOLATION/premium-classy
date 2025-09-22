@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SiteSettings } from "@/types";
 import { urlFor } from "@/lib/sanity";
+import { defaultHeroImage } from "@/lib/hero-images";
 
 interface HeroSectionProps {
   siteSettings?: SiteSettings;
@@ -12,7 +13,7 @@ export function HeroSection({ siteSettings }: HeroSectionProps) {
   const heroData = siteSettings?.heroSection;
   const backgroundImage = heroData?.backgroundImage
     ? urlFor(heroData.backgroundImage).width(1920).height(1080).url()
-    : "/api/placeholder/1920/1080";
+    : defaultHeroImage.url;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -20,7 +21,7 @@ export function HeroSection({ siteSettings }: HeroSectionProps) {
       <div className="absolute inset-0 z-0">
         <Image
           src={backgroundImage}
-          alt={heroData?.backgroundImage?.alt || "Event planning background"}
+          alt={heroData?.backgroundImage?.alt || `${defaultHeroImage.alt} - Premium&Classy Event Planning`}
           fill
           className="object-cover"
           priority

@@ -2,13 +2,14 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./sanity/schemaTypes";
+import { config } from "./src/config";
 
 export default defineConfig({
-  name: "event-planner",
-  title: "Event Planner CMS",
+  name: "premium-classy",
+  title: "Premium&Classy CMS",
 
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "your-project-id",
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  projectId: config.sanity.projectId,
+  dataset: config.sanity.dataset,
 
   plugins: [structureTool(), visionTool()],
 

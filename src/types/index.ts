@@ -93,7 +93,15 @@ export interface Portfolio {
   };
   eventType: string;
   eventDate: string;
-  images: Array<{
+  images?: Array<{
+    asset: {
+      _ref: string;
+      _type: "reference";
+    };
+    alt?: string;
+    caption?: string;
+  }>;
+  gallery?: Array<{
     asset: {
       _ref: string;
       _type: "reference";

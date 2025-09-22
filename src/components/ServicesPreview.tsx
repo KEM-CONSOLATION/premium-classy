@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Service } from "@/types";
 import { urlFor } from "@/lib/sanity";
+import { serviceImages, sectionImages } from "@/lib/section-images";
 import { ArrowRight } from "lucide-react";
 
 interface ServicesPreviewProps {
@@ -15,8 +16,17 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
   const previewServices = services.slice(0, 3);
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-20 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={sectionImages.decorative.elegant}
+          alt="Elegant event setup background"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-white/85" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">
             Our Services
@@ -45,11 +55,12 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-                    <span className="text-white text-6xl font-bold">
-                      {service.title.charAt(0)}
-                    </span>
-                  </div>
+                  <Image
+                    src={serviceImages[service.slug.current as keyof typeof serviceImages] || sectionImages.services.wedding}
+                    alt={`${service.title} - Premium&Classy event planning service`}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
                 )}
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
               </div>

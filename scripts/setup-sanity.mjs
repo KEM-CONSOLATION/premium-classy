@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
+import path from 'path';
 import readline from 'readline';
 
 const rl = readline.createInterface({

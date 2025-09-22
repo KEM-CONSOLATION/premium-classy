@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { client, queries } from "@/lib/sanity";
 import { urlFor } from "@/lib/sanity";
 import { Service } from "@/types";
+import { sectionImages, imageAlts, serviceImages } from "@/lib/section-images";
 import {
   CheckCircle,
   ArrowRight,
@@ -47,13 +48,23 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-amber-50 to-orange-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={sectionImages.services.background}
+            alt={imageAlts.services.background}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">
               Our Services
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
               From intimate gatherings to grand celebrations, we offer
               comprehensive event planning services tailored to your unique
               vision and budget.
@@ -154,10 +165,14 @@ export default function ServicesPage() {
                         className="object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-                        <span className="text-white text-6xl font-bold">
-                          {service.title.charAt(0)}
-                        </span>
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={serviceImages[service.slug.current as keyof typeof serviceImages] || sectionImages.services.wedding}
+                          alt={`${service.title} - Premium&Classy event planning service`}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/20" />
                       </div>
                     )}
                   </div>

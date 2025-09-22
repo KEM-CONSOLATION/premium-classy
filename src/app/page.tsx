@@ -5,8 +5,10 @@ import { HeroSection } from "@/components/HeroSection";
 import { ServicesPreview } from "@/components/ServicesPreview";
 import { PortfolioPreview } from "@/components/PortfolioPreview";
 import { TestimonialsPreview } from "@/components/TestimonialsPreview";
+import { StructuredData } from "@/components/StructuredData";
 import { client, queries } from "@/lib/sanity";
 import { SiteSettings, Service, Portfolio, Testimonial } from "@/types";
+import { generateStructuredData } from "@/lib/seo";
 
 export default function Home() {
   const [siteSettings, setSiteSettings] = useState<SiteSettings | null>(null);
@@ -48,8 +50,19 @@ export default function Home() {
     );
   }
 
+  // Generate structured data
+  const organizationData = generateStructuredData("Organization", {
+    phone: siteSettings?.contactInfo?.phone,
+    city: "Your City",
+    state: "Your State",
+    instagram: siteSettings?.socialLinks?.instagram,
+    facebook: siteSettings?.socialLinks?.facebook,
+    tiktok: siteSettings?.socialLinks?.tiktok,
+  });
+
   return (
     <>
+      <StructuredData data={organizationData} />
       <HeroSection siteSettings={siteSettings || undefined} />
       <ServicesPreview services={services} />
       <PortfolioPreview portfolio={portfolio} />

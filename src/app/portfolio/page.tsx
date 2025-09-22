@@ -8,6 +8,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { client, queries } from "@/lib/sanity";
 import { urlFor } from "@/lib/sanity";
 import { Portfolio } from "@/types";
+import { sectionImages, imageAlts } from "@/lib/section-images";
+import { getDefaultPortfolioImage, getPortfolioImages } from "@/lib/portfolio-images";
 import { Calendar, MapPin, Filter, Grid, List, Play } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import Lightbox from "yet-another-react-lightbox";
@@ -56,10 +58,28 @@ export default function PortfolioPage() {
   );
 
   const openLightbox = (item: Portfolio, imageIndex: number = 0) => {
-    const images = item.images.map((img) => ({
-      src: urlFor(img).width(1200).height(800).url(),
-      alt: img.alt || item.title,
-    }));
+    let images: Array<{ src: string; alt: string }> = [];
+    
+    // Check for images in both possible fields
+    if (item.images && item.images.length > 0) {
+      images = item.images.map((img) => ({
+        src: urlFor(img).width(1200).height(800).url(),
+        alt: img.alt || item.title,
+      }));
+    } else if (item.gallery && item.gallery.length > 0) {
+      images = item.gallery.map((img) => ({
+        src: urlFor(img).width(1200).height(800).url(),
+        alt: img.alt || item.title,
+      }));
+    } else {
+      // Use placeholder images
+      const placeholderImages = getPortfolioImages(item.eventType, 6);
+      images = placeholderImages.map((img) => ({
+        src: img.url,
+        alt: img.alt,
+      }));
+    }
+    
     setLightboxImages(images);
     setLightboxIndex(imageIndex);
     setLightboxOpen(true);
@@ -76,13 +96,23 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-amber-50 to-orange-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={sectionImages.portfolio.background}
+            alt={imageAlts.portfolio.background}
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">
               Our Portfolio
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
               Explore our collection of beautifully planned events. Each
               celebration tells a unique story and showcases our commitment to
               creating unforgettable experiences.
@@ -170,22 +200,30 @@ export default function PortfolioPage() {
                     }`}
                     onClick={() => openLightbox(item, 0)}
                   >
-                    {item.images && item.images.length > 0 ? (
+                    {((item.images && item.images.length > 0) || (item.gallery && item.gallery.length > 0)) ? (
                       <Image
-                        src={urlFor(item.images[0])
-                          .width(500)
-                          .height(400)
-                          .url()}
-                        alt={item.images[0].alt || item.title}
+                        src={
+                          item.images && item.images.length > 0
+                            ? urlFor(item.images[0]).width(500).height(400).url()
+                            : item.gallery && item.gallery.length > 0
+                            ? urlFor(item.gallery[0]).width(500).height(400).url()
+                            : getDefaultPortfolioImage(item.eventType).url
+                        }
+                        alt={
+                          item.images?.[0]?.alt || 
+                          item.gallery?.[0]?.alt || 
+                          item.title
+                        }
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-                        <span className="text-white text-4xl font-bold">
-                          {item.title.charAt(0)}
-                        </span>
-                      </div>
+                      <Image
+                        src={getDefaultPortfolioImage(item.eventType).url}
+                        alt={getDefaultPortfolioImage(item.eventType).alt}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
                     )}
 
                     {/* Overlay */}

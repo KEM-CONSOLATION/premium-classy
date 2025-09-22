@@ -179,9 +179,9 @@ const sampleSiteSettings = {
   secondaryColor: '#F5F5DC',
   contactInfo: {
     email: 'hello@elegantevents.co',
-    phone: '+1 (555) 123-4567',
+    phone: '+234 (70) 3189-6845',
     address: '123 Event Plaza, Suite 456\nSan Francisco, CA 94102',
-    whatsappNumber: '+15551234567',
+    whatsappNumber: '+2347031896845',
   },
   socialLinks: {
     instagram: 'https://instagram.com/eleganteventsco',
@@ -216,6 +216,7 @@ async function populateSanity() {
     // Create services
     console.log('📝 Creating services...');
     for (const service of sampleServices) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const result = await client.create(service);
       console.log(`✅ Created service: ${service.title}`);
     }

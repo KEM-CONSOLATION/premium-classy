@@ -93,7 +93,7 @@ export function generateStructuredData(type: string, data: Record<string, unknow
         name: "Premium&Classy",
         description: "Professional event planning services for weddings, birthdays, corporate events, and special celebrations.",
         url: "https://premiumandclassy.com",
-        logo: "https://premiumandclassy.com/logo.png",
+        logo: "https://premiumandclassy.netlify.app/Logo.png",
         contactPoint: {
           "@type": "ContactPoint",
           telephone: data.phone || "+1-555-PREMIUM",

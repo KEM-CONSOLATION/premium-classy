@@ -9,7 +9,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { SiteSettings } from "@/types";
-import { urlFor } from "@/lib/sanity";
+// urlFor import removed - using static logo now
 import { generateWhatsAppUrl } from "@/lib/utils";
 
 interface FooterProps {
@@ -45,23 +45,13 @@ export function Footer({ siteSettings }: FooterProps) {
           {/* Brand Section */}
           <div className="space-y-8">
             <Link href="/" className="flex items-center space-x-2">
-              {siteSettings?.logo ? (
-                <Image
-                  src={urlFor(siteSettings.logo).width(40).height(40).url()}
-                  alt={
-                    siteSettings.logo.alt || siteSettings.brandName || "Logo"
-                  }
-                  width={40}
-                  height={40}
-                  className="h-8 w-auto"
-                />
-              ) : (
-                <div className="h-8 w-8 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">
-                    {siteSettings?.brandName?.charAt(0) || "P"}
-                  </span>
-                </div>
-              )}
+              <Image
+                src="/Logo.png"
+                alt={siteSettings?.brandName || "Premium&Classy Logo"}
+                width={40}
+                height={40}
+                className="h-8 w-8 rounded-full object-cover"
+              />
               <span className="text-xl font-bold text-white">
                 {siteSettings?.brandName || "Premium&Classy"}
               </span>

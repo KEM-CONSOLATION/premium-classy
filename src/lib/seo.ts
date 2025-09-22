@@ -9,6 +9,10 @@ export interface SEOProps {
   type?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
+  icons?: {
+    icon?: Array<{ url: string; sizes?: string; type?: string }>;
+    apple?: Array<{ url: string; sizes?: string; type?: string }>;
+  };
 }
 
 export function generateMetadata({

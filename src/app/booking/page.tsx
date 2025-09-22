@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-// No direct client import needed for write operations
+import { sendBookingNotification } from "@/lib/email";
 import { Booking } from "@/types";
 import {
   Clock,
@@ -27,6 +27,9 @@ const bookingSchema = z.object({
     message: "Please select an event type",
   }),
   eventDate: z.string().min(1, "Please select an event date"),
+  guestCount: z.string().min(1, "Please enter guest count"),
+  budget: z.string().min(1, "Please enter budget range"),
+  venue: z.string().optional(),
   message: z.string().optional(),
 });
 
@@ -58,7 +61,7 @@ export default function BookingPage() {
         createdAt: new Date().toISOString(),
       };
 
-      // Use API route for write operations (requires write token)
+      // Save to Sanity CMS
       const response = await fetch("/api/sanity", {
         method: "POST",
         headers: {
@@ -72,6 +75,14 @@ export default function BookingPage() {
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Send email notification (optional - won't fail if templates not set up)
+      try {
+        await sendBookingNotification(data);
+      } catch (emailError) {
+        console.log("Email notification failed (templates may not be set up yet):", emailError);
+        // Don't throw error - form submission still succeeds
       }
 
       setSubmitStatus("success");
@@ -313,6 +324,54 @@ export default function BookingPage() {
                             </p>
                           )}
                         </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="guestCount">Guest Count *</Label>
+                          <Input
+                            id="guestCount"
+                            {...register("guestCount")}
+                            className="mt-1"
+                            placeholder="e.g., 50-100"
+                          />
+                          {errors.guestCount && (
+                            <p className="mt-1 text-sm text-red-600">
+                              {errors.guestCount.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="budget">Budget Range *</Label>
+                          <select
+                            id="budget"
+                            {...register("budget")}
+                            className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          >
+                            <option value="">Select budget range</option>
+                            <option value="Under $5,000">Under $5,000</option>
+                            <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                            <option value="$10,000 - $25,000">$10,000 - $25,000</option>
+                            <option value="$25,000 - $50,000">$25,000 - $50,000</option>
+                            <option value="Over $50,000">Over $50,000</option>
+                          </select>
+                          {errors.budget && (
+                            <p className="mt-1 text-sm text-red-600">
+                              {errors.budget.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label htmlFor="venue">Venue (if known)</Label>
+                        <Input
+                          id="venue"
+                          {...register("venue")}
+                          className="mt-1"
+                          placeholder="e.g., Hotel ballroom, outdoor garden, etc."
+                        />
                       </div>
                     </div>
 

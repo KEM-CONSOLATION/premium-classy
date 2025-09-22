@@ -15,6 +15,7 @@
     "populate-sanity": "tsx scripts/populate-sanity.ts"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@headlessui/react": "^2.2.8",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.2.2",

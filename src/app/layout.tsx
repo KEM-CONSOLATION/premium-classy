@@ -32,6 +32,15 @@ export const metadata: Metadata = generateMetadata({
     "event coordinator",
   ],
   url: "https://premiumandclassy.com",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
 });
 
 export const viewport: Viewport = {

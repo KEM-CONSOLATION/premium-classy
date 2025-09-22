@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { fetchSiteSettings } from "@/lib/sanity";
+import { sendContactNotification } from "@/lib/email";
 import { SiteSettings, ContactInquiry } from "@/types";
 import { sectionImages, imageAlts } from "@/lib/section-images";
 import {
@@ -80,7 +81,7 @@ export default function ContactPage() {
         createdAt: new Date().toISOString(),
       };
 
-      // Use API route for write operations (requires write token)
+      // Save to Sanity CMS
       const response = await fetch("/api/sanity", {
         method: "POST",
         headers: {
@@ -94,6 +95,14 @@ export default function ContactPage() {
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Send email notification (optional - won't fail if templates not set up)
+      try {
+        await sendContactNotification(data);
+      } catch (emailError) {
+        console.log("Email notification failed (templates may not be set up yet):", emailError);
+        // Don't throw error - form submission still succeeds
       }
 
       setSubmitStatus("success");

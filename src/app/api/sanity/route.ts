@@ -11,13 +11,13 @@ const readClient = createClient({
   perspective: "published",
 });
 
-// Create a server-side Sanity client for write operations (requires write token)
+// Create a server-side Sanity client for write operations (uses hardcoded token)
 const writeClient = createClient({
   projectId: config.sanity.projectId,
   dataset: config.sanity.dataset,
   apiVersion: config.sanity.apiVersion,
   useCdn: false, // Don't use CDN for write operations
-  token: process.env.SANITY_API_WRITE_TOKEN || process.env.SANITY_API_TOKEN,
+  token: config.sanity.writeToken,
   perspective: "published",
 });
 

@@ -9,6 +9,8 @@ export const config = {
     useCdn: true, // Always use CDN for better performance
     ignoreBrowserTokenWarning: true,
     perspective: "published",
+    // Write token for forms (hardcoded to avoid Netlify env vars)
+    writeToken: "skqGXtBRkOOYNOr2xHzDlLAFV2nIbFVdQsRuEObHE2kaNUV5LvQMmAm9Yua19PdVSVbPF0zswcGYd84geFtzwdPYGSLXynjOjhZN0qTs1kYiEK2cMdQ4XQNnrASnm5WsfNAcWQp7IAal3lyCogTS00QCzAIRWYLZjPw81eABm6eZWoomHFG7",
   },
   app: {
     name: "Premium&Classy",

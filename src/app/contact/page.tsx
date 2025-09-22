@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { client, queries } from "@/lib/sanity";
+import { fetchSiteSettings } from "@/lib/sanity";
 import { SiteSettings, ContactInquiry } from "@/types";
 import { sectionImages, imageAlts } from "@/lib/section-images";
 import {
@@ -59,7 +59,7 @@ export default function ContactPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const settingsData = await client.fetch(queries.siteSettings);
+        const settingsData = await fetchSiteSettings();
         setSiteSettings(settingsData);
       } catch (error) {
         console.error("Error fetching site settings:", error);
@@ -80,10 +80,21 @@ export default function ContactPage() {
         createdAt: new Date().toISOString(),
       };
 
-      await client.create({
-        _type: "contactInquiry",
-        ...inquiryData,
+      // Use API route for write operations (requires write token)
+      const response = await fetch("/api/sanity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _type: "contactInquiry",
+          ...inquiryData,
+        }),
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       setSubmitStatus("success");
       reset();

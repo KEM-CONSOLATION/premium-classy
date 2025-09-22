@@ -2,12 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@sanity/client";
 import { config } from "@/config";
 
-// Create a server-side Sanity client (no token for public read access)
-const serverClient = createClient({
+// Create a server-side Sanity client for read operations (no token for public read access)
+const readClient = createClient({
   projectId: config.sanity.projectId,
   dataset: config.sanity.dataset,
   apiVersion: config.sanity.apiVersion,
   useCdn: true, // Use CDN for better performance
+  perspective: "published",
+});
+
+// Create a server-side Sanity client for write operations (requires write token)
+const writeClient = createClient({
+  projectId: config.sanity.projectId,
+  dataset: config.sanity.dataset,
+  apiVersion: config.sanity.apiVersion,
+  useCdn: false, // Don't use CDN for write operations
+  token: process.env.SANITY_API_WRITE_TOKEN || process.env.SANITY_API_TOKEN,
   perspective: "published",
 });
 
@@ -20,7 +30,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const data = await serverClient.fetch(query);
+    const data = await readClient.fetch(query);
     
     return NextResponse.json(
       { result: data },
@@ -45,7 +55,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const result = await serverClient.create(body);
+    const result = await writeClient.create(body);
     
     return NextResponse.json(
       { result },

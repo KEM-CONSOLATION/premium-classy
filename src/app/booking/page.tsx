@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { client } from "@/lib/sanity";
+// No direct client import needed for write operations
 import { Booking } from "@/types";
 import {
   Clock,
@@ -58,10 +58,21 @@ export default function BookingPage() {
         createdAt: new Date().toISOString(),
       };
 
-      await client.create({
-        _type: "booking",
-        ...bookingData,
+      // Use API route for write operations (requires write token)
+      const response = await fetch("/api/sanity", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _type: "booking",
+          ...bookingData,
+        }),
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       setSubmitStatus("success");
       reset();

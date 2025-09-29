@@ -454,46 +454,78 @@ export default function BookingPage() {
                 </CardContent>
               </Card>
 
-              {/* Event Types */}
+              {/* Event Types & Pricing */}
               <Card className="shadow-lg border-0">
                 <CardHeader>
                   <CardTitle className="text-xl">Events We Plan</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                      <span>Weddings & Receptions</span>
+                  <ul className="space-y-3 text-sm">
+                    <li className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                        <span>Weddings & Receptions</span>
+                      </div>
+                      <span className="text-amber-600 font-semibold">₦5M - ₦50M</span>
                     </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                      <span>Birthday Celebrations</span>
+                    <li className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                        <span>Proposal Packages</span>
+                      </div>
+                      <span className="text-amber-600 font-semibold">₦850K - ₦2M</span>
                     </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                      <span>Corporate Events</span>
+                    <li className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                        <span>Funeral Services</span>
+                      </div>
+                      <span className="text-amber-600 font-semibold">₦15M+</span>
                     </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                      <span>Anniversary Parties</span>
+                    <li className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                        <span>Birthday Celebrations</span>
+                      </div>
+                      <span className="text-amber-600 font-semibold">₦1M+</span>
                     </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                      <span>Baby Showers</span>
+                    <li className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                        <span>Corporate Events</span>
+                      </div>
+                      <span className="text-amber-600 font-semibold">₦5M - ₦10M+</span>
                     </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                      <span>Graduation Parties</span>
-                    </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                      <span>Holiday Celebrations</span>
-                    </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                      <span>Custom Events</span>
+                    <li className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                        <span>Custom Events</span>
+                      </div>
+                      <span className="text-amber-600 font-semibold">Contact Us</span>
                     </li>
                   </ul>
+                </CardContent>
+              </Card>
+
+              {/* WhatsApp Contact */}
+              <Card className="shadow-lg border-0 bg-green-50">
+                <CardHeader>
+                  <CardTitle className="text-xl text-green-800">Need More Details?</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-green-700 text-sm mb-4">
+                    For more information about our event packages and custom pricing, 
+                    send us a message on WhatsApp:
+                  </p>
+                  <a 
+                    href="https://wa.me/2349022603658" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
+                  >
+                    <span>📱</span>
+                    <span>WhatsApp: 09022603658</span>
+                  </a>
                 </CardContent>
               </Card>
             </div>

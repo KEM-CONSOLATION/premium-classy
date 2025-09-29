@@ -19,7 +19,7 @@ const sampleServices = [
     title: 'Wedding Planning',
     slug: { current: 'wedding-planning' },
     description: 'Complete wedding planning service from concept to execution. We handle every detail to make your special day perfect.',
-    priceRange: '$5,000 - $15,000',
+    priceRange: '₦5M - ₦50M',
     features: [
       'Initial consultation and vision planning',
       'Vendor selection and management',
@@ -35,7 +35,7 @@ const sampleServices = [
     title: 'Corporate Events',
     slug: { current: 'corporate-events' },
     description: 'Professional corporate event planning for conferences, team building, product launches, and company celebrations.',
-    priceRange: '$3,000 - $25,000',
+    priceRange: '₦5M - ₦10M and above',
     features: [
       'Venue selection and booking',
       'Catering coordination',
@@ -51,7 +51,7 @@ const sampleServices = [
     title: 'Birthday Parties',
     slug: { current: 'birthday-parties' },
     description: 'Memorable birthday celebrations for all ages. From intimate gatherings to grand celebrations.',
-    priceRange: '$1,500 - $8,000',
+    priceRange: '₦1M and above',
     features: [
       'Theme development',
       'Venue decoration',
@@ -64,10 +64,44 @@ const sampleServices = [
   },
   {
     _type: 'service',
+    title: 'Proposal Packages',
+    slug: { current: 'proposal-packages' },
+    description: 'Create the perfect moment with our romantic proposal planning services. We make your proposal unforgettable.',
+    priceRange: '₦850K - ₦2M',
+    features: [
+      'Romantic venue selection',
+      'Flower and decoration setup',
+      'Photography coordination',
+      'Surprise element planning',
+      'Timeline management',
+      'Backup plan preparation'
+    ],
+    order: 4,
+    isActive: true,
+  },
+  {
+    _type: 'service',
+    title: 'Funeral Services',
+    slug: { current: 'funeral-services' },
+    description: 'Compassionate and dignified funeral planning services to honor your loved ones with respect and care.',
+    priceRange: '₦15M and above',
+    features: [
+      'Venue coordination',
+      'Service planning',
+      'Catering arrangements',
+      'Floral tributes',
+      'Guest coordination',
+      'Memorial keepsakes'
+    ],
+    order: 5,
+    isActive: true,
+  },
+  {
+    _type: 'service',
     title: 'Anniversary Celebrations',
     slug: { current: 'anniversary-celebrations' },
     description: 'Celebrate your milestones with elegant anniversary parties that honor your journey together.',
-    priceRange: '$2,500 - $12,000',
+    priceRange: 'Contact for pricing',
     features: [
       'Romantic venue selection',
       'Memory display creation',
@@ -75,7 +109,7 @@ const sampleServices = [
       'Special entertainment',
       'Keepsake arrangements'
     ],
-    order: 4,
+    order: 6,
     isActive: true,
   }
 ];

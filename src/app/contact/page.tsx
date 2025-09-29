@@ -150,22 +150,38 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Phone */}
-            {contactInfo?.phone && (
-              <Card className="text-center shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Phone className="h-6 w-6 text-amber-600" />
-                  </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Call Us</h3>
-                  <a
-                    href={`tel:${contactInfo.phone}`}
-                    className="text-amber-600 hover:text-amber-700 transition-colors"
-                  >
-                    {contactInfo.phone}
-                  </a>
-                </CardContent>
-              </Card>
-            )}
+            <Card className="text-center shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Phone className="h-6 w-6 text-amber-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">Call Us</h3>
+                <a
+                  href="tel:+2349022603658"
+                  className="text-amber-600 hover:text-amber-700 transition-colors"
+                >
+                  +234 (0) 902 260 3658
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* WhatsApp */}
+            <Card className="text-center shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-xl">📱</span>
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">WhatsApp</h3>
+                <a
+                  href="https://wa.me/2349022603658"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-600 hover:text-green-700 transition-colors"
+                >
+                  09022603658
+                </a>
+              </CardContent>
+            </Card>
 
             {/* Email */}
             {contactInfo?.email && (

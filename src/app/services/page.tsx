@@ -73,6 +73,114 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
+              Our Pricing
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Transparent pricing for all our event planning services. All prices are in Nigerian Naira (₦).
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {/* Wedding Packages */}
+            <Card className="p-6 text-center hover:shadow-xl transition-all duration-300 border-0 bg-white">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">💒</span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">Wedding Packages</h3>
+              <p className="text-gray-600 mb-4">White & Traditional Weddings</p>
+              <div className="text-2xl font-bold text-amber-600 mb-4">₦5M - ₦50M</div>
+              <p className="text-sm text-gray-500">Complete wedding planning and coordination</p>
+            </Card>
+
+            {/* Proposal Packages */}
+            <Card className="p-6 text-center hover:shadow-xl transition-all duration-300 border-0 bg-white">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">💍</span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">Proposal Packages</h3>
+              <p className="text-gray-600 mb-4">Romantic Proposal Planning</p>
+              <div className="text-2xl font-bold text-amber-600 mb-4">₦850K - ₦2M</div>
+              <p className="text-sm text-gray-500">Memorable proposal experiences</p>
+            </Card>
+
+            {/* Funeral Services */}
+            <Card className="p-6 text-center hover:shadow-xl transition-all duration-300 border-0 bg-white">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🕊️</span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">Funeral Services</h3>
+              <p className="text-gray-600 mb-4">Dignified Memorial Planning</p>
+              <div className="text-2xl font-bold text-amber-600 mb-4">₦15M and above</div>
+              <p className="text-sm text-gray-500">Compassionate funeral coordination</p>
+            </Card>
+
+            {/* Birthday Celebrations */}
+            <Card className="p-6 text-center hover:shadow-xl transition-all duration-300 border-0 bg-white">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🎂</span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">Birthday Celebrations</h3>
+              <p className="text-gray-600 mb-4">Special Day Planning</p>
+              <div className="text-2xl font-bold text-amber-600 mb-4">₦1M and above</div>
+              <p className="text-sm text-gray-500">Unforgettable birthday experiences</p>
+            </Card>
+
+            {/* Corporate Events */}
+            <Card className="p-6 text-center hover:shadow-xl transition-all duration-300 border-0 bg-white">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🏢</span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">Corporate Events</h3>
+              <p className="text-gray-600 mb-4">Seminars & Business Events</p>
+              <div className="text-2xl font-bold text-amber-600 mb-4">₦5M - ₦10M+</div>
+              <p className="text-sm text-gray-500">Professional event management</p>
+            </Card>
+
+            {/* Custom Events */}
+            <Card className="p-6 text-center hover:shadow-xl transition-all duration-300 border-0 bg-white">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">✨</span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">Custom Events</h3>
+              <p className="text-gray-600 mb-4">Other Special Occasions</p>
+              <div className="text-2xl font-bold text-amber-600 mb-4">Contact Us</div>
+              <p className="text-sm text-gray-500">Tailored to your specific needs</p>
+            </Card>
+          </div>
+
+          {/* WhatsApp Contact */}
+          <div className="text-center bg-amber-50 p-8 rounded-2xl">
+            <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">
+              Need More Details?
+            </h3>
+            <p className="text-lg text-gray-600 mb-6">
+              For more information about our event packages and custom pricing, 
+              send us a message on WhatsApp:
+            </p>
+            <Button
+              asChild
+              size="lg"
+              className="bg-green-600 hover:bg-green-700 text-white"
+            >
+              <a 
+                href="https://wa.me/2349022603658" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center justify-center space-x-2"
+              >
+                <span>📱</span>
+                <span>WhatsApp: 09022603658</span>
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Services Overview */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -194,13 +302,33 @@ export default function ServicesPage() {
                         {service.description}
                       </p>
 
-                      {service.priceRange && (
-                        <div className="bg-amber-50 p-4 rounded-lg">
-                          <p className="text-amber-800 font-semibold">
-                            Starting from: {service.priceRange}
-                          </p>
-                        </div>
-                      )}
+                      {(() => {
+                        // Get consistent pricing based on service title
+                        const getPricing = (title: string) => {
+                          const lowerTitle = title.toLowerCase();
+                          if (lowerTitle.includes('wedding') || lowerTitle.includes('traditional')) {
+                            return '₦5M - ₦50M';
+                          } else if (lowerTitle.includes('proposal')) {
+                            return '₦850K - ₦2M';
+                          } else if (lowerTitle.includes('funeral')) {
+                            return '₦15M and above';
+                          } else if (lowerTitle.includes('birthday') || lowerTitle.includes('celebration')) {
+                            return '₦1M and above';
+                          } else if (lowerTitle.includes('corporate') || lowerTitle.includes('seminar')) {
+                            return '₦5M - ₦10M and above';
+                          }
+                          return 'Contact for pricing';
+                        };
+
+                        const pricing = getPricing(service.title);
+                        return (
+                          <div className="bg-amber-50 p-4 rounded-lg">
+                            <p className="text-amber-800 font-semibold">
+                              Starting from: {pricing}
+                            </p>
+                          </div>
+                        );
+                      })()}
 
                       {service.features && service.features.length > 0 && (
                         <div>

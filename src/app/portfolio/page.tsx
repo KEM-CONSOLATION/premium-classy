@@ -31,6 +31,7 @@ export default function PortfolioPage() {
         const portfolioData = await fetchPortfolio();
         setPortfolio(portfolioData || []);
         setFilteredPortfolio(portfolioData || []);
+        console.log("portfolioData", portfolioData);
       } catch (error) {
         console.error("Error fetching portfolio:", error);
       } finally {
@@ -260,7 +261,8 @@ export default function PortfolioPage() {
                         variant="outline"
                         className="bg-white/90 hover:bg-white text-gray-900 border-white"
                       >
-                        View Gallery ({item.images?.length || 0})
+                        View Gallery 
+                        {/* ({item.images?.length || 0}) */}
                       </Button>
                     </div>
                   </div>

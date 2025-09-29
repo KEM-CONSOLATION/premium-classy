@@ -153,17 +153,26 @@ export function Footer({ siteSettings }: FooterProps) {
                   Contact
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
-                  {siteSettings?.contactInfo?.phone && (
-                    <li>
-                      <a
-                        href={`tel:${siteSettings.contactInfo.phone}`}
-                        className="flex items-center text-sm leading-6 text-gray-300 hover:text-white transition-colors"
-                      >
-                        <Phone className="h-4 w-4 mr-2" />
-                        {siteSettings.contactInfo.phone}
-                      </a>
-                    </li>
-                  )}
+                  <li>
+                    <a
+                      href="tel:+2349022603658"
+                      className="flex items-center text-sm leading-6 text-gray-300 hover:text-white transition-colors"
+                    >
+                      <Phone className="h-4 w-4 mr-2" />
+                      +234 (0) 902 260 3658
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://wa.me/2349022603658"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-sm leading-6 text-gray-300 hover:text-white transition-colors"
+                    >
+                      <MessageCircle className="h-4 w-4 mr-2" />
+                      WhatsApp: 09022603658
+                    </a>
+                  </li>
                   {siteSettings?.contactInfo?.email && (
                     <li>
                       <a

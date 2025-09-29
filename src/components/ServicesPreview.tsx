@@ -85,11 +85,31 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
                   {service.description}
                 </p>
 
-                {service.priceRange && (
-                  <p className="text-amber-600 font-semibold mb-4">
-                    {service.priceRange}
-                  </p>
-                )}
+                {(() => {
+                  // Get consistent pricing based on service title
+                  const getPricing = (title: string) => {
+                    const lowerTitle = title.toLowerCase();
+                    if (lowerTitle.includes('wedding') || lowerTitle.includes('traditional')) {
+                      return '₦5M - ₦50M';
+                    } else if (lowerTitle.includes('proposal')) {
+                      return '₦850K - ₦2M';
+                    } else if (lowerTitle.includes('funeral')) {
+                      return '₦15M and above';
+                    } else if (lowerTitle.includes('birthday') || lowerTitle.includes('celebration')) {
+                      return '₦1M and above';
+                    } else if (lowerTitle.includes('corporate') || lowerTitle.includes('seminar')) {
+                      return '₦5M - ₦10M and above';
+                    }
+                    return 'Contact for pricing';
+                  };
+
+                  const pricing = getPricing(service.title);
+                  return (
+                    <p className="text-amber-600 font-semibold mb-4">
+                      {pricing}
+                    </p>
+                  );
+                })()}
 
                 {service.features && service.features.length > 0 && (
                   <ul className="space-y-2 mb-4">

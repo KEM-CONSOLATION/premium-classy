@@ -50,7 +50,6 @@ export default function Home() {
     );
   }
 
-  // Generate structured data
   const organizationData = generateStructuredData("Organization", {
     phone: siteSettings?.contactInfo?.phone,
     city: "Your City",

@@ -61,7 +61,6 @@ export default function BookingPage() {
         createdAt: new Date().toISOString(),
       };
 
-      // Save to Sanity CMS
       const response = await fetch("/api/sanity", {
         method: "POST",
         headers: {
@@ -77,12 +76,10 @@ export default function BookingPage() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // Send email notification (optional - won't fail if templates not set up)
       try {
         await sendBookingNotification(data);
       } catch (emailError) {
         console.log("Email notification failed (templates may not be set up yet):", emailError);
-        // Don't throw error - form submission still succeeds
       }
 
       setSubmitStatus("success");
@@ -95,12 +92,10 @@ export default function BookingPage() {
     }
   };
 
-  // Get minimum date (today)
   const today = new Date().toISOString().split("T")[0];
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-amber-50 to-orange-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -116,7 +111,6 @@ export default function BookingPage() {
         </div>
       </section>
 
-      {/* Booking Process */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -177,11 +171,9 @@ export default function BookingPage() {
         </div>
       </section>
 
-      {/* Booking Form */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Form */}
             <div className="lg:col-span-2">
               <Card className="shadow-xl border-0">
                 <CardHeader className="text-center">
@@ -224,7 +216,6 @@ export default function BookingPage() {
                   )}
 
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    {/* Personal Information */}
                     <div className="space-y-4">
                       <h3 className="text-lg font-semibold text-gray-900">
                         Personal Information
@@ -280,7 +271,6 @@ export default function BookingPage() {
                       </div>
                     </div>
 
-                    {/* Event Information */}
                     <div className="space-y-4">
                       <h3 className="text-lg font-semibold text-gray-900">
                         Event Information
@@ -375,7 +365,6 @@ export default function BookingPage() {
                       </div>
                     </div>
 
-                    {/* Additional Details */}
                     <div>
                       <Label htmlFor="message">Additional Details</Label>
                       <Textarea
@@ -391,7 +380,6 @@ export default function BookingPage() {
                       </p>
                     </div>
 
-                    {/* Submit Button */}
                     <Button
                       type="submit"
                       disabled={isSubmitting}
@@ -416,9 +404,7 @@ export default function BookingPage() {
               </Card>
             </div>
 
-            {/* Sidebar */}
             <div className="space-y-6">
-              {/* Contact Info */}
               <Card className="shadow-lg border-0">
                 <CardHeader>
                   <CardTitle className="text-xl">Quick Contact</CardTitle>
@@ -454,7 +440,6 @@ export default function BookingPage() {
                 </CardContent>
               </Card>
 
-              {/* Event Types & Pricing */}
               <Card className="shadow-lg border-0">
                 <CardHeader>
                   <CardTitle className="text-xl">Events We Plan</CardTitle>
@@ -507,7 +492,6 @@ export default function BookingPage() {
                 </CardContent>
               </Card>
 
-              {/* WhatsApp Contact */}
               <Card className="shadow-lg border-0 bg-green-50">
                 <CardHeader>
                   <CardTitle className="text-xl text-green-800">Need More Details?</CardTitle>

@@ -2,21 +2,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@sanity/client";
 import { config } from "@/config";
 
-// Create a server-side Sanity client for read operations (no token for public read access)
 const readClient = createClient({
   projectId: config.sanity.projectId,
   dataset: config.sanity.dataset,
   apiVersion: config.sanity.apiVersion,
-  useCdn: true, // Use CDN for better performance
+  useCdn: true, 
   perspective: "published",
 });
 
-// Create a server-side Sanity client for write operations (uses hardcoded token)
 const writeClient = createClient({
   projectId: config.sanity.projectId,
   dataset: config.sanity.dataset,
   apiVersion: config.sanity.apiVersion,
-  useCdn: false, // Don't use CDN for write operations
+  useCdn: false, 
   token: config.sanity.writeToken,
   perspective: "published",
 });

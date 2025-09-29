@@ -21,17 +21,14 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   
-  // SEO optimizations
   poweredByHeader: false,
   generateEtags: true,
   compress: true,
   
-  // Performance optimizations
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
   
-  // Security headers
   async headers() {
     return [
       {
@@ -58,7 +55,6 @@ const nextConfig: NextConfig = {
     ];
   },
   
-  // Redirects for SEO
   async redirects() {
     return [
       {

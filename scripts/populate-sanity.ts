@@ -1,7 +1,6 @@
 import { createClient } from '@sanity/client';
 import dotenv from 'dotenv';
 
-// Load environment variables
 dotenv.config({ path: '.env.local' });
 
 const client = createClient({
@@ -12,7 +11,6 @@ const client = createClient({
   apiVersion: '2023-05-03',
 });
 
-// Sample data for services
 const sampleServices = [
   {
     _type: 'service',
@@ -114,7 +112,6 @@ const sampleServices = [
   }
 ];
 
-// Sample data for portfolio items
 const samplePortfolio = [
   {
     _type: 'portfolio',
@@ -162,7 +159,6 @@ const samplePortfolio = [
   }
 ];
 
-// Sample testimonials
 const sampleTestimonials = [
   {
     _type: 'testimonial',
@@ -202,7 +198,6 @@ const sampleTestimonials = [
   }
 ];
 
-// Sample site settings
 const sampleSiteSettings = {
   _type: 'siteSettings',
   _id: 'siteSettings',
@@ -247,7 +242,6 @@ async function populateSanity() {
   try {
     console.log('🚀 Starting Sanity population...');
 
-    // Create services
     console.log('📝 Creating services...');
     for (const service of sampleServices) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -255,21 +249,18 @@ async function populateSanity() {
       console.log(`✅ Created service: ${service.title}`);
     }
 
-    // Create portfolio items
     console.log('🎨 Creating portfolio items...');
     for (const item of samplePortfolio) {
       const result = await client.create(item);
       console.log(`✅ Created portfolio item: ${item.title}`);
     }
 
-    // Create testimonials
     console.log('💬 Creating testimonials...');
     for (const testimonial of sampleTestimonials) {
       const result = await client.create(testimonial);
       console.log(`✅ Created testimonial from: ${testimonial.clientName}`);
     }
 
-    // Create/update site settings
     console.log('⚙️ Creating site settings...');
     const settingsResult = await client.createOrReplace(sampleSiteSettings);
     console.log('✅ Created site settings');

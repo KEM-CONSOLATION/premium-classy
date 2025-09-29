@@ -8,7 +8,7 @@ export const client = createClient({
   projectId: config.sanity.projectId,
   dataset: config.sanity.dataset,
   apiVersion: config.sanity.apiVersion,
-  useCdn: true, // Always use CDN for better performance and CORS handling
+  useCdn: false, // Use API route to avoid CORS issues
   ignoreBrowserTokenWarning: true,
   perspective: "published",
 });
@@ -19,32 +19,21 @@ export const getSanityCDNUrl = (query: string) => {
   return `${baseUrl}?query=${encodeURIComponent(query)}`;
 };
 
-// Fallback fetch function that tries CDN first, then API route
+// Fetch function that uses API route to avoid CORS issues
 export const fetchWithFallback = async (query: string) => {
   try {
-    // Try direct CDN first (fastest, no CORS issues)
-    const cdnUrl = getSanityCDNUrl(query);
-    const response = await fetch(cdnUrl);
-    
-    if (response.ok) {
-      const data = await response.json();
-      return data.result;
-    }
-  } catch (error) {
-    console.log("CDN fetch failed, trying API route:", error);
-  }
-
-  try {
-    // Fallback to API route
+    // Use API route (server-side, no CORS issues)
     const apiUrl = `${config.app.url}/api/sanity?query=${encodeURIComponent(query)}`;
     const response = await fetch(apiUrl);
     
     if (response.ok) {
       const data = await response.json();
       return data.result;
+    } else {
+      throw new Error(`API route failed with status: ${response.status}`);
     }
   } catch (error) {
-    console.error("Both CDN and API route failed:", error);
+    console.error("API route failed:", error);
     throw error;
   }
 };
